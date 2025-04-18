@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25 Minutes Approach - Grade 4 Literacy & Numeracy Tracker</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --dark: #1a2639;
+            --light: #f0f4f8;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: var(--dark);
+            color: white;
+            padding: 20px 0;
+            height: 100vh;
+            position: fixed;
+        }
+        
+        .logo {
+            text-align: center;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo h2 {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+        
+        .nav-menu {
+            margin-top: 30px;
+        }
+        
+        .nav-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .nav-item.active {
+            background-color: var(--primary);
+        }
+        
+        .nav-item i {
+            margin-right: 10px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .card .value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        /* Forms */
+        .form-container {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        select.form-control {
+            height: 40px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+        }
+        
+        /* Tables */
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .badge-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .badge-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .badge-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* Login Page */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--light);
+        }
+        
+        .login-box {
+            background: white;
+            width: 400px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .login-box h2 {
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+        
+        .login-box .logo {
+            margin-bottom: 30px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 80px;
+                overflow: hidden;
+            }
+            
+            .main-content {
+                margin-left: 80px;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Login Page (Default) -->
+    <div class="login-container" id="loginPage">
+        <div class="login-box">
+            <div class="logo">
+                <i class="fas fa-graduation-cap" style="font-size: 2.5rem; color: var(--primary);"></i>
+                <h2>25 Minutes Approach</h2>
+            </div>
+            <h3>Grade 4 Literacy & Numeracy Tracker</h3>
+            <p>Betty Go-Belmonte Elementary School</p>
+            
+            <div class="form-group" style="margin-top: 30px;">
+                <select id="username" class="form-control">
+                    <option value="">Select your username</option>
+                    <option value="Armentia">Armentia</option>
+                    <option value="Padillo">Padillo</option>
+                    <option value="Cardona">Cardona</option>
+                    <option value="Bassig">Bassig</option>
+                    <option value="Bernal">Bernal</option>
+                    <option value="Bugarin">Bugarin</option>
+                    <option value="Enderiz">Enderiz</option>
+                    <option value="Delara">Delara</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <input type="password" id="password" class="form-control" placeholder="Password" value="grade4">
+            </div>
+            
+            <button class="btn btn-primary" style="width: 100%;" onclick="login()">Login</button>
+            
+            <p style="margin-top: 20px; font-size: 0.8rem; color: #666;">
+                For authorized personnel only
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Application (Hidden until login) -->
+    <div id="appContainer" style="display: none;">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-graduation-cap" style="font-size: 2rem;"></i>
+                <h2>25 Minutes</h2>
+                <p>Grade 4 Tracker</p>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Add Student</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Student Records</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Improvement Tracker</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-tools"></i>
+                    <span>Batch Update</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="nav-item" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Student Data Encoding</h1>
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Teacher&background=4a6fa5&color=fff" alt="User">
+                    <span id="currentUser">Armentia</span>
+                </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="cards">
+                <div class="card">
+                    <h3>Total Students</h3>
+                    <div class="value">187</div>
+                </div>
+                <div class="card">
+                    <h3>Q1 Completed</h3>
+                    <div class="value">92%</div>
+                </div>
+                <div class="card">
+                    <h3>Interventions Needed</h3>
+                    <div class="value">24</div>
+                </div>
+            </div>
+            
+            <!-- Student Encoding Form -->
+            <div class="form-container">
+                <h2 style="margin-bottom: 20px;">Student Information</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Middle Initial</label>
+                        <input type="text" class="form-control" maxlength="1">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select class="form-control">
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Section</label>
+                        <select class="form-control">
+                            <option value="">Select</option>
+                            <option value="aguinaldo">Aguinaldo</option>
+                            <option value="bonifacio">Bonifacio</option>
+                            <option value="delpilar">Del Pilar</option>
+                            <option value="jacinto">Jacinto</option>
+                            <option value="luna">Luna</option>
+                            <option value="mabini">Mabini</option>
+                            <option value="rizal">Rizal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quarter</label>
+                        <select class="form-control">
+                            <option value="q1">Q1 (Baseline)</option>
+                            <option value="q2">Q2</option>
+                            <option value="q3">Q3</option>
+                            <option value="q4">Q4</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <h3 style="margin: 25px 0 15px;">Assessment Levels</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>English Literacy</label>
+                        <select class="form-control">
+                            <option value="">Select level</option>
+                            <option value="syllable">Syllable</option>
+                            <option value="word">Word</option>
+                            <option value="phrase">Phrase</option>
+                            <option value="sentence">Sentence</option>
+                            <option value="paragraph">Paragraph</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Filipino Literacy</label>
+                        <select class="form-control">
+                            <option value="">Select level</option>
+                            <option value="pantig">Pantig</option>
+                            <option value="salita">Salita</option>
+                            <option value="parirala">Parirala</option>
+                            <option value="pangungusap">Pangungusap</option>
+                            <option value="talata">Talata</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Numeracy</label>
+                        <select class="form-control">
+                            <option value="">Select level</option>
+                            <option value="non-numerate">Non-Numerate</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="developing">Developing</option>
+                            <option value="proficient">Proficient</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Notes/Observations</label>
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Suggested Interventions</label>
+                    <div style="padding: 15px; background-color: #f8f9fa; border-radius: 4px; color: #666;">
+                        <i class="fas fa-lightbulb" style="color: var(--warning);"></i> 
+                        Based on the selected levels, we recommend focused syllable drills in English and basic counting exercises for numeracy.
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary">Save Student Record</button>
+            </div>
+            
+            <!-- Student Records Table -->
+            <div class="table-container">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>Student Records</h2>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Search..." style="width: 200px; display: inline-block;">
+                        <select class="form-control" style="width: 150px; display: inline-block; margin-left: 10px;">
+                            <option value="">Filter by Section</option>
+                            <option value="aguinaldo">Aguinaldo</option>
+                            <option value="bonifacio">Bonifacio</option>
+                            <option value="delpilar">Del Pilar</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Section</th>
+                            <th>Gender</th>
+                            <th>Q1</th>
+                            <th>Q2</th>
+                            <th>Q3</th>
+                            <th>Q4</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dela Cruz, Juan A.</td>
+                            <td>Rizal</td>
+                            <td>Male</td>
+                            <td><span class="badge badge-warning">Developing</span></td>
+                            <td><span class="badge badge-success">Proficient</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <button style="background: none; border: none; color: var(--primary); cursor: pointer;">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button style="background: none; border: none; color: var(--danger); cursor: pointer; margin-left: 10px;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Santos, Maria B.</td>
+                            <td>Mabini</td>
+                            <td>Female</td>
+                            <td><span class="badge badge-danger">Non-Numerate</span></td>
+                            <td><span class="badge badge-warning">Beginner</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <button style="background: none; border: none; color: var(--primary); cursor: pointer;">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button style="background: none; border: none; color: var(--danger); cursor: pointer; margin-left: 10px;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Reyes, Pedro C.</td>
+                            <td>Bonifacio</td>
+                            <td>Male</td>
+                            <td><span class="badge badge-success">Proficient</span></td>
+                            <td><span class="badge badge-success">Proficient</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <button style="background: none; border: none; color: var(--primary); cursor: pointer;">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button style="background: none; border: none; color: var(--danger); cursor: pointer; margin-left: 10px;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple login function
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username && password === 'grade4') {
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('appContainer').style.display = 'flex';
+                document.getElementById('currentUser').textContent = username;
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        }
+        
+        // Logout function
+        function logout() {
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('appContainer').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = 'grade4';
+        }
+        
+        // Simulate loading of actual data in a real application
+        window.onload = function() {
+            // In a real app, you would fetch data from an API here
+            console.log('System loaded');
+        }
+    </script>
+</body>
+</html>
